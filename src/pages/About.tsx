@@ -65,7 +65,6 @@ export default function About() {
               <article className="post-entry" key={meta.file}>
                 <header className="post-entry__header">
                   <h3 className="post-entry__title">{meta.title}</h3>
-                  <span className="post-entry__date">{formatDate(meta.date)}</span>
                 </header>
                 <div
                   className="post-entry__body hero__bio"
@@ -82,11 +81,25 @@ export default function About() {
           <h2 className="garden__section-title">Recent Posts</h2>
         </div>
         {latest ? (
-          <article className="latest-post">
-            <h3 className="latest-post__title">{latest.title}</h3>
-            <p className="latest-post__date">{formatDate(latest.date)}</p>
-            <div className="hero__bio" dangerouslySetInnerHTML={{ __html: latest.bodyHtml }} />
-          </article>
+          <div className="posts-feed">
+            <article className="post-entry" id={`post-${latest.file}`}>
+              <header className="post-entry__header">
+                <h2 className="post-entry__title">{latest.title}</h2>
+                <span className="post-entry__date">
+                  {formatDate(latest.date)} · {latest.category || 'Uncategorised'}
+                </span>
+              </header>
+              <div
+                className="post-entry__body hero__bio"
+                dangerouslySetInnerHTML={{ __html: latest.bodyHtml }}
+              />
+              {latest.author && (
+                <footer className="post-entry__footer">
+                  Written by {latest.author}
+                </footer>
+              )}
+            </article>
+          </div>
         ) : (
           <p className="hero__bio">No posts yet.</p>
         )}

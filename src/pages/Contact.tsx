@@ -2,14 +2,13 @@ interface ContactMethod {
   label: string;
   value: string;
   href?: string;
-  kind: 'email' | 'link' | 'plain';
+  kind: 'email' | 'link';
 }
 
 // Edit this list to change what appears on the Contact page.
 const METHODS: ContactMethod[] = [
   { label: 'Email',    value: 'contact@kingstoneinvestments.com', href: 'mailto:marcusejhawkins@gmail.com',                 kind: 'email' },
   { label: 'LinkedIn', value: 'Kingstone Investments',            href: 'https://www.linkedin.com/company/kingstoneinvestments/', kind: 'link' },
-  { label: 'HQ',       value: 'London, United Kingdom',                                                                       kind: 'plain' }
 ];
 
 export default function Contact() {

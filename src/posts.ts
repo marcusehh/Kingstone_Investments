@@ -7,6 +7,7 @@ export interface PostMeta {
   title: string;
   date: string;
   category?: string;
+  author?: string;
 }
 
 export interface Post extends PostMeta {

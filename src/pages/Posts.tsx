@@ -11,6 +11,7 @@ import { usePosts, formatDate, type PostMeta } from '../posts';
 //
 // Posts are sorted by date descending automatically.
 export const POSTS: PostMeta[] = [
+  { file: 'fall_of_pcs', title: 'An enquiry into the fall of ownership of Consumer Gaming PCs.', date: '2026-06-10', category: 'TMT', author: 'Marcus Hawkins' },
 ];
 
 interface Props {
@@ -46,6 +47,11 @@ export default function Posts({ activeCategory }: Props) {
                 className="post-entry__body hero__bio"
                 dangerouslySetInnerHTML={{ __html: p.bodyHtml }}
               />
+              {p.author && (
+                <footer className="post-entry__footer">
+                  Written by {p.author}
+                </footer>
+              )}
             </article>
           ))
         )}

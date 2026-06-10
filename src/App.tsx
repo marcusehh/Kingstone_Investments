@@ -35,10 +35,10 @@ export default function App() {
 
   return (
     <div className="app-wrapper">
-      <header className="nav">
-        <div className="banner">
-          <img src={`${baseUrl}assets/banner.png`} alt="Kingstone Investments — Excellence, Invested" className="banner__img" />
-        </div>
+      <div className="banner">
+        <img src={`${baseUrl}assets/banner.png`} alt="Kingstone Investments — Excellence, Invested" className="banner__img" />
+      </div>
+      <header className={`nav${route === 'posts' ? ' nav--static' : ''}`}>
         <nav className="nav__inner" aria-label="Primary">
           <ul className="nav__links">
             {TAB_ORDER.map((r) => (
@@ -50,21 +50,21 @@ export default function App() {
             ))}
           </ul>
         </nav>
-        <div className={`subheader${route === 'posts' ? ' open' : ''}`} aria-hidden={route !== 'posts'}>
-          <div className="subheader__inner">
-            {CATEGORIES.map((c) => (
-              <button
-                key={c}
-                type="button"
-                className={`subheader__link${c === activeCategory ? ' active' : ''}`}
-                onClick={() => setActiveCategory(c)}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </div>
       </header>
+      <div className={`subheader${route === 'posts' ? ' open' : ''}`} aria-hidden={route !== 'posts'}>
+        <div className="subheader__inner">
+          {CATEGORIES.map((c) => (
+            <button
+              key={c}
+              type="button"
+              className={`subheader__link${c === activeCategory ? ' active' : ''}`}
+              onClick={() => setActiveCategory(c)}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <main className="app-main">
         <section className="page container" hidden={route !== 'about'}>
@@ -84,9 +84,6 @@ export default function App() {
       <footer className="footer">
         <div className="footer__inner">
           <span className="footer__copy">© {new Date().getFullYear()} Kingstone Investments</span>
-          <a href="#/contact" className="footer__copy external-link">
-            Contact us
-          </a>
         </div>
       </footer>
     </div>
