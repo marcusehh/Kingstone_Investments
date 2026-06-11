@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useHashRoute, ROUTES, type Route } from './useHashRoute';
 import About from './pages/About';
 import Leadership from './pages/Leadership';
 import Posts from './pages/Posts';
-import Contact from './pages/Contact';
+import Contact, { METHODS as CONTACT_METHODS } from './pages/Contact';
 
 const TAB_LABELS: Record<Route, string> = {
-  about: 'About',
+  about: 'Home',
   posts: 'Posts',
   leadership: 'Leadership',
   contact: 'Contact'
 };
 
-const TAB_ORDER: Route[] = ['about', 'posts', 'leadership', 'contact'];
+// Contact is rendered as a dropdown menu, so it is excluded from the routed tabs.
+const TAB_ORDER: Route[] = ['about', 'posts', 'leadership'];
 
 export const CATEGORIES = [
   'All',
@@ -29,9 +30,30 @@ export const CATEGORIES = [
 export default function App() {
   const route = useHashRoute();
   const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [contactOpen, setContactOpen] = useState(false);
+  const contactRef = useRef<HTMLLIElement>(null);
   const baseUrl = import.meta.env.BASE_URL;
 
   void ROUTES; // keep import for type completeness
+
+  // Close the Contact dropdown on outside click or Escape.
+  useEffect(() => {
+    if (!contactOpen) return;
+    const onPointerDown = (e: MouseEvent) => {
+      if (contactRef.current && !contactRef.current.contains(e.target as Node)) {
+        setContactOpen(false);
+      }
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setContactOpen(false);
+    };
+    document.addEventListener('mousedown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [contactOpen]);
 
   return (
     <div className="app-wrapper">
@@ -48,6 +70,32 @@ export default function App() {
                 </a>
               </li>
             ))}
+            <li className="nav__links-item--right nav__contact" ref={contactRef}>
+              <button
+                type="button"
+                className={`nav__contact-toggle${contactOpen ? ' is-open' : ''}`}
+                onClick={() => setContactOpen((o) => !o)}
+                aria-haspopup="true"
+                aria-expanded={contactOpen}
+              >
+                Contact
+              </button>
+              <div className={`nav__contact-menu${contactOpen ? ' open' : ''}`} role="menu">
+                {CONTACT_METHODS.map((m) => (
+                  <a
+                    key={m.label}
+                    className="nav__contact-item"
+                    href={m.href}
+                    target={m.kind === 'link' ? '_blank' : undefined}
+                    rel={m.kind === 'link' ? 'noreferrer' : undefined}
+                    role="menuitem"
+                    onClick={() => setContactOpen(false)}
+                  >
+                    {m.label}
+                  </a>
+                ))}
+              </div>
+            </li>
           </ul>
         </nav>
       </header>

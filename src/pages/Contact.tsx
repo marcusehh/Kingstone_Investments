@@ -1,12 +1,12 @@
-interface ContactMethod {
+export interface ContactMethod {
   label: string;
   value: string;
   href?: string;
   kind: 'email' | 'link';
 }
 
-// Edit this list to change what appears on the Contact page.
-const METHODS: ContactMethod[] = [
+// Edit this list to change what appears in the Contact menu.
+export const METHODS: ContactMethod[] = [
   { label: 'Email',    value: 'contact@kingstoneinvestments.com', href: 'mailto:marcusejhawkins@gmail.com',                 kind: 'email' },
   { label: 'LinkedIn', value: 'Kingstone Investments',            href: 'https://www.linkedin.com/company/kingstoneinvestments/', kind: 'link' },
 ];

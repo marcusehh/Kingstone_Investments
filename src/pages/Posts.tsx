@@ -28,7 +28,7 @@ export default function Posts({ activeCategory }: Props) {
     <>
       <div className="page__header">
         <h1 className="page__title">Posts</h1>
-        <p className="page__subtitle">Latest updates from Kingstone Investments.</p>
+        <p className="page__subtitle">Latest updates & ideas from Kingstone Investments.</p>
       </div>
 
       <div className="posts-feed">

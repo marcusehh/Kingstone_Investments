@@ -1,5 +1,6 @@
 import { usePosts, formatDate } from '../posts';
 import { useMarkdownCollection } from '../loadMarkdown';
+import Reveal from '../Reveal';
 
 // ── Quarterly results registry ────────────────────────────────────────
 // One line per quarterly result. `file` is the markdown filename in
@@ -37,8 +38,8 @@ export default function About() {
   return (
     <>
       <div className="page__header">
-        <h1 className="page__title">Excellence, Invested.</h1>
-        <p>A student-run investment club for undergraduates at leading UK universities.</p>
+        <h1 className="page__title page__title--intro">Excellence, Invested.</h1>
+        <p className="page__lead">A student-run investment club run by undergraduates at leading UK universities.</p>
       </div>
 
       <div className="hero__bio">
@@ -53,57 +54,61 @@ export default function About() {
         </p>
       </div>
 
-      <div className="garden__section" style={{ marginTop: 48 }}>
-        <div className="garden__section-header">
-          <h2 className="garden__section-title">Quarterly results</h2>
+      <Reveal>
+        <div className="garden__section" style={{ marginTop: 48 }}>
+          <div className="garden__section-header">
+            <h2 className="garden__section-title">Quarterly results</h2>
+          </div>
+          {quarterlyResults.length === 0 ? (
+            <p className="hero__bio">No quarterly results yet.</p>
+          ) : (
+            <div className="posts-feed">
+              {quarterlyResults.map(({ meta, bodyHtml }) => (
+                <article className="post-entry" key={meta.file}>
+                  <header className="post-entry__header">
+                    <h3 className="post-entry__title">{meta.title}</h3>
+                  </header>
+                  <div
+                    className="post-entry__body hero__bio"
+                    dangerouslySetInnerHTML={{ __html: bodyHtml }}
+                  />
+                </article>
+              ))}
+            </div>
+          )}
         </div>
-        {quarterlyResults.length === 0 ? (
-          <p className="hero__bio">No quarterly results yet.</p>
-        ) : (
-          <div className="posts-feed">
-            {quarterlyResults.map(({ meta, bodyHtml }) => (
-              <article className="post-entry" key={meta.file}>
+      </Reveal>
+
+      <Reveal>
+        <div className="garden__section">
+          <div className="garden__section-header">
+            <h2 className="garden__section-title">Recent Posts</h2>
+          </div>
+          {latest ? (
+            <div className="posts-feed">
+              <article className="post-entry" id={`post-${latest.file}`}>
                 <header className="post-entry__header">
-                  <h3 className="post-entry__title">{meta.title}</h3>
+                  <h2 className="post-entry__title">{latest.title}</h2>
+                  <span className="post-entry__date">
+                    {formatDate(latest.date)} · {latest.category || 'Uncategorised'}
+                  </span>
                 </header>
                 <div
                   className="post-entry__body hero__bio"
-                  dangerouslySetInnerHTML={{ __html: bodyHtml }}
+                  dangerouslySetInnerHTML={{ __html: latest.bodyHtml }}
                 />
+                {latest.author && (
+                  <footer className="post-entry__footer">
+                    Written by {latest.author}
+                  </footer>
+                )}
               </article>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className="garden__section">
-        <div className="garden__section-header">
-          <h2 className="garden__section-title">Recent Posts</h2>
+            </div>
+          ) : (
+            <p className="hero__bio">No posts yet.</p>
+          )}
         </div>
-        {latest ? (
-          <div className="posts-feed">
-            <article className="post-entry" id={`post-${latest.file}`}>
-              <header className="post-entry__header">
-                <h2 className="post-entry__title">{latest.title}</h2>
-                <span className="post-entry__date">
-                  {formatDate(latest.date)} · {latest.category || 'Uncategorised'}
-                </span>
-              </header>
-              <div
-                className="post-entry__body hero__bio"
-                dangerouslySetInnerHTML={{ __html: latest.bodyHtml }}
-              />
-              {latest.author && (
-                <footer className="post-entry__footer">
-                  Written by {latest.author}
-                </footer>
-              )}
-            </article>
-          </div>
-        ) : (
-          <p className="hero__bio">No posts yet.</p>
-        )}
-      </div>
+      </Reveal>
     </>
   );
 }
