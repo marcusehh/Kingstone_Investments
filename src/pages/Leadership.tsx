@@ -24,7 +24,7 @@ export default function Leadership() {
     <>
       <div className="page__header">
         <h1 className="page__title">Leadership</h1>
-        <p className="page__subtitle">The team behind Kingstone Investments.</p>
+        <p className="page__subtitle">Meet the team behind Kingstone Investments.</p>
       </div>
 
       <div className="leader-cards-wrapper">

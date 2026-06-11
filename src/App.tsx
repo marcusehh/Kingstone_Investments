@@ -38,7 +38,7 @@ export default function App() {
       <div className="banner">
         <img src={`${baseUrl}assets/banner.png`} alt="Kingstone Investments — Excellence, Invested" className="banner__img" />
       </div>
-      <header className={`nav${route === 'posts' ? ' nav--static' : ''}`}>
+      <header className="nav">
         <nav className="nav__inner" aria-label="Primary">
           <ul className="nav__links">
             {TAB_ORDER.map((r) => (

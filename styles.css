@@ -2,8 +2,8 @@
   --bg: #242424;
   --bg-subtle: #2e2e2e;
   --text: #f4f4f5;
-  --text-muted: #b4b4bd;
-  --text-faint: #8a8a93;
+  --text-muted: #ffffff;
+  --text-faint: #ffffff;
   --accent: #c9a227;
   --accent-hover: #e6c14a;
   --accent-bg: rgba(201, 162, 39, 0.1);
@@ -14,7 +14,7 @@
   --tag-bg: #34343a;
   --tag-text: #d4d4d8;
 
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: Georgia, 'Times New Roman', serif;
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --radius: 8px;
   --radius-sm: 4px;
@@ -25,6 +25,13 @@
   --banner-height: clamp(80px, 14vw, 160px);
   --nav-bar-height: 56px;
   --header-height: var(--banner-height);
+}
+
+/* Card-internal text keeps the original muted palette (page body stays bright) */
+.post-entry,
+.leader-card {
+  --text-muted: #b4b4bd;
+  --text-faint: #8a8a93;
 }
 
 * {
@@ -66,7 +73,7 @@ a:hover {
 .app-main {
   flex: 1;
   padding-bottom: 100px;
-  background: #2a2a2a;
+  background: #343434;
 }
 
 .container {
@@ -88,10 +95,6 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 200;
-}
-
-.nav--static {
-  position: static;
 }
 
 .banner {
@@ -132,7 +135,7 @@ a:hover {
 
 .nav__links a {
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--text-muted);
   padding: 10px 18px;
@@ -164,8 +167,8 @@ a:hover {
   -webkit-backdrop-filter: blur(12px) saturate(180%);
   border-top: 1px solid transparent;
   position: sticky;
-  top: 0;
-  z-index: 200;
+  top: 63px;
+  z-index: 190;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
               border-top-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -186,8 +189,9 @@ a:hover {
   flex-wrap: nowrap;
   overflow-x: auto;
   opacity: 0;
-  transform: translateY(-6px);
-  transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+  transform: translateY(-100%);
+  transition: opacity 0.3s ease,
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .subheader.open .subheader__inner {
@@ -791,7 +795,7 @@ a:hover {
 .leader-card h3 a:hover { color: var(--accent); }
 
 .leader-card h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -877,6 +881,13 @@ a:hover {
 .post-entry__body strong {
   color: inherit;
   font-weight: 700;
+}
+
+/* Keep long reference URLs from spilling past the card edge on narrow screens */
+.post-entry__body,
+.post-entry__body a {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .post-entry__footer {

@@ -3,5 +3,6 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   base: '/Kingstone_Investments/',
-  plugins: [react()]
+  plugins: [react()],
+  server: { port: process.env.PORT ? Number(process.env.PORT) : 5173 }
 });
