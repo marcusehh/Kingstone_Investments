@@ -39,7 +39,19 @@ export default function About() {
     <>
       <div className="page__header">
         <h1 className="page__title page__title--intro">Excellence, Invested.</h1>
-        <p className="page__lead">A student-run investment club run by undergraduates at leading UK universities.</p>
+        <p className="page__lead">
+          {'A student-run investment club run by undergraduates at leading UK universities.'
+            .split(' ')
+            .map((word, i) => (
+              <span
+                className="page__lead-word"
+                key={i}
+                style={{ ['--i' as string]: i }}
+              >
+                {word}{' '}
+              </span>
+            ))}
+        </p>
       </div>
 
       <div className="hero__bio">
@@ -54,8 +66,12 @@ export default function About() {
         </p>
       </div>
 
+      <div className="scroll-cue" aria-hidden="true">
+        <span className="scroll-cue__arrow" />
+      </div>
+
       <Reveal>
-        <div className="garden__section" style={{ marginTop: 48 }}>
+        <div className="garden__section" id="quarterly-results" style={{ marginTop: 48 }}>
           <div className="garden__section-header">
             <h2 className="garden__section-title">Quarterly results</h2>
           </div>
@@ -79,8 +95,12 @@ export default function About() {
         </div>
       </Reveal>
 
+      <div className="scroll-cue" aria-hidden="true">
+        <span className="scroll-cue__arrow" />
+      </div>
+
       <Reveal>
-        <div className="garden__section">
+        <div className="garden__section" id="recent-posts">
           <div className="garden__section-header">
             <h2 className="garden__section-title">Recent Posts</h2>
           </div>

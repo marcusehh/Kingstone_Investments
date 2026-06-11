@@ -163,9 +163,10 @@ a:hover {
 }
 
 .nav__contact-toggle {
-  font: inherit;
+  font-family: inherit;
   font-size: 0.875rem;
   font-weight: 700;
+  line-height: inherit;
   letter-spacing: 0.02em;
   color: var(--text-muted);
   padding: 10px 18px;
@@ -173,6 +174,9 @@ a:hover {
   background: transparent;
   border-radius: var(--radius-sm);
   cursor: pointer;
+  display: block;
+  text-align: center;
+  width: 100%;
   transition: color var(--transition), background var(--transition);
 }
 
@@ -185,9 +189,10 @@ a:hover {
 .nav__contact-menu {
   position: absolute;
   top: calc(100% + 8px);
-  left: 0;
   right: 0;
-  width: 100%;
+  left: auto;
+  width: 120px;
+  max-width: calc(100vw - 32px);
   background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -321,8 +326,8 @@ a:hover {
 }
 
 @keyframes hero-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* "Excellence, Invested." gently fades in on first load */
@@ -348,30 +353,36 @@ a:hover {
 }
 
 /* About hero lead-in shares the serif title font, revealed left-to-right after the title */
-@keyframes lead-wipe-in {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-  to {
-    -webkit-mask-position: 0% 0;
-    mask-position: 0% 0;
-  }
-}
-
 .page__lead {
   font-family: var(--font-serif);
   font-size: 1.25rem;
   color: var(--text-muted);
   line-height: 1.5;
   max-width: 1000px;
-  -webkit-mask-image: linear-gradient(to right, #000 40%, transparent 60%);
-  mask-image: linear-gradient(to right, #000 40%, transparent 60%);
-  -webkit-mask-size: 250% 100%;
-  mask-size: 250% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  animation: lead-wipe-in 2.6s ease-out 0.6s both;
+}
+
+.page__lead-word {
+  display: inline-block;
+  white-space: pre;
+  opacity: 0;
+  filter: blur(4px);
+  animation: lead-word-in 1.2s ease-out both;
+  animation-delay: calc(0.6s + var(--i) * 0.12s);
+}
+
+@keyframes lead-word-in {
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page__lead-word {
+    animation: none;
+    opacity: 1;
+    filter: none;
+  }
 }
 
 /* ── Hero / bio text ── */
@@ -407,19 +418,16 @@ a:hover {
 /* Scroll-triggered reveal: fades in with a gentle top-to-bottom drop */
 .reveal {
   opacity: 0;
-  transform: translateY(-18px);
-  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  transition: opacity 1.2s ease-out;
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
-    transform: none;
     transition: none;
   }
 }
@@ -748,7 +756,8 @@ a:hover {
     flex-direction: row;
   }
 
-  .nav__links a {
+  .nav__links a,
+  .nav__contact-toggle {
     padding: 8px 12px;
     font-size: 0.8125rem;
   }
@@ -1064,6 +1073,43 @@ a:hover {
 
 .garden__section-link:hover {
   color: var(--accent);
+}
+
+/* ── Scroll-down cue (Praxis-style bouncing chevron) ─────────────── */
+.scroll-cue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 64px;
+  margin: 32px 0 8px;
+  pointer-events: none;
+}
+
+.scroll-cue__arrow {
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg);
+  animation: scroll-cue-bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-cue-bounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(45deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(45deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue__arrow {
+    animation: none;
+  }
 }
 
 html,
