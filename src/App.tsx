@@ -58,7 +58,10 @@ export default function App() {
   return (
     <div className="app-wrapper">
       <div className="banner">
-        <img src={`${baseUrl}assets/banner.png`} alt="Kingstone Investments — Excellence, Invested" className="banner__img" />
+        <picture>
+          <source media="(max-width: 720px)" srcSet={`${baseUrl}assets/bannerP.png`} />
+          <img src={`${baseUrl}assets/banner.png`} alt="Kingstone Investments — Excellence, Invested" className="banner__img" />
+        </picture>
       </div>
       <header className="nav">
         <nav className="nav__inner" aria-label="Primary">
