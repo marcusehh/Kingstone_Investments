@@ -247,7 +247,7 @@ a:hover {
 /* ── Sub-header (drops down for Posts) ── */
 .subheader {
   width: 100%;
-  height: 46px;
+  height: 0;
   overflow: hidden;
   background: transparent;
   backdrop-filter: blur(12px) saturate(180%);
@@ -256,9 +256,11 @@ a:hover {
   position: sticky;
   top: 63px;
   z-index: 190;
+  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .subheader.open {
+  height: 46px;
   border-top-color: var(--border);
 }
 
