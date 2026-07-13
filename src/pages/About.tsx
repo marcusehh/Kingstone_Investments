@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { usePosts, formatDate } from '../posts';
 import { useMarkdownCollection } from '../loadMarkdown';
 import Reveal from '../Reveal';
@@ -21,6 +22,11 @@ interface ResultMeta {
 
 const QUARTERLY_RESULTS: ResultMeta[] = [
   {
+    file: 'q2-2026',
+    title: 'Q2 2026',
+    date: 'July 2026',
+  },
+  {
     file: 'q1-2026',
     title: 'Q1 2026',
     date: 'April 2026',
@@ -30,6 +36,7 @@ const QUARTERLY_RESULTS: ResultMeta[] = [
 export default function About() {
   const posts = usePosts();
   const latest = posts[0];
+  const [qrIndex, setQrIndex] = useState(0);
 
   const quarterlyResults = useMarkdownCollection('quarterly-results', QUARTERLY_RESULTS).sort(
     (a, b) => (a.meta.date < b.meta.date ? 1 : -1)
@@ -78,18 +85,46 @@ export default function About() {
           {quarterlyResults.length === 0 ? (
             <p className="hero__bio">No quarterly results yet.</p>
           ) : (
-            <div className="posts-feed">
-              {quarterlyResults.map(({ meta, bodyHtml }) => (
-                <article className="post-entry" key={meta.file}>
-                  <header className="post-entry__header">
-                    <h3 className="post-entry__title">{meta.title}</h3>
-                  </header>
-                  <div
-                    className="post-entry__body hero__bio"
-                    dangerouslySetInnerHTML={{ __html: bodyHtml }}
-                  />
-                </article>
-              ))}
+            <div className="qr-carousel">
+              {(() => {
+                const { meta, bodyHtml } = quarterlyResults[qrIndex];
+                return (
+                  <article className="post-entry" key={meta.file}>
+                    <header className="post-entry__header">
+                      <h3 className="post-entry__title">{meta.title}</h3>
+                    </header>
+                    <div
+                      className="post-entry__body hero__bio"
+                      dangerouslySetInnerHTML={{ __html: bodyHtml }}
+                    />
+                  </article>
+                );
+              })()}
+              {quarterlyResults.length > 1 && (
+                <div className="qr-carousel__controls">
+                  <button
+                    type="button"
+                    className="qr-carousel__arrow"
+                    onClick={() => setQrIndex((i) => Math.max(0, i - 1))}
+                    disabled={qrIndex === 0}
+                    aria-label="Previous quarter"
+                  >
+                    ‹
+                  </button>
+                  <span className="qr-carousel__indicator">
+                    {qrIndex + 1} / {quarterlyResults.length}
+                  </span>
+                  <button
+                    type="button"
+                    className="qr-carousel__arrow"
+                    onClick={() => setQrIndex((i) => Math.min(quarterlyResults.length - 1, i + 1))}
+                    disabled={qrIndex === quarterlyResults.length - 1}
+                    aria-label="Next quarter"
+                  >
+                    ›
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>
