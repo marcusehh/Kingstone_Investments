@@ -9,6 +9,7 @@ While the gains of AI, in a similar manner to the internet, are objectively mass
 There is no question that AI has and will continue to change the world. It may take far longer than some think for the benefits to truly materialise and until then it would be wise to expect a correction of the market as AI companies continue to look more and more overvalued.
 
 **List of References:**
+
 The Economist. (2026). Elon Musk on AI: humans will no longer be in control in ten years.
 
 London School of Economics. (2025). _AI and the Generational Divide at Work._
