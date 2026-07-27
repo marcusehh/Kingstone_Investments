@@ -86,22 +86,8 @@ export default function About() {
             <p className="hero__bio">No quarterly results yet.</p>
           ) : (
             <div className="qr-carousel">
-              {(() => {
-                const { meta, bodyHtml } = quarterlyResults[qrIndex];
-                return (
-                  <article className="post-entry" key={meta.file}>
-                    <header className="post-entry__header">
-                      <h3 className="post-entry__title">{meta.title}</h3>
-                    </header>
-                    <div
-                      className="post-entry__body hero__bio"
-                      dangerouslySetInnerHTML={{ __html: bodyHtml }}
-                    />
-                  </article>
-                );
-              })()}
-              {quarterlyResults.length > 1 && (
-                <div className="qr-carousel__controls">
+              <div className="qr-carousel__row">
+                {quarterlyResults.length > 1 && (
                   <button
                     type="button"
                     className="qr-carousel__arrow"
@@ -111,9 +97,22 @@ export default function About() {
                   >
                     ‹
                   </button>
-                  <span className="qr-carousel__indicator">
-                    {qrIndex + 1} / {quarterlyResults.length}
-                  </span>
+                )}
+                {(() => {
+                  const { meta, bodyHtml } = quarterlyResults[qrIndex];
+                  return (
+                    <article className="post-entry" key={meta.file}>
+                      <header className="post-entry__header">
+                        <h3 className="post-entry__title">{meta.title}</h3>
+                      </header>
+                      <div
+                        className="post-entry__body hero__bio"
+                        dangerouslySetInnerHTML={{ __html: bodyHtml }}
+                      />
+                    </article>
+                  );
+                })()}
+                {quarterlyResults.length > 1 && (
                   <button
                     type="button"
                     className="qr-carousel__arrow"
@@ -123,7 +122,12 @@ export default function About() {
                   >
                     ›
                   </button>
-                </div>
+                )}
+              </div>
+              {quarterlyResults.length > 1 && (
+                <span className="qr-carousel__indicator">
+                  {qrIndex + 1} / {quarterlyResults.length}
+                </span>
               )}
             </div>
           )}

@@ -11,6 +11,7 @@ import { usePosts, formatDate, type PostMeta } from '../posts';
 //
 // Posts are sorted by date descending automatically.
 export const POSTS: PostMeta[] = [
+  { file: 'Are_we_ready_for_AIs_implementation', title: 'Are we ready for AIs implementation?', date: '2026-07-26', category: 'TMT', author: 'Marcus Hawkins' },
   { file: 'fall_of_pcs', title: 'An enquiry into the fall of ownership of Consumer Gaming PCs.', date: '2026-06-10', category: 'TMT', author: 'Marcus Hawkins' },
 ];
 
