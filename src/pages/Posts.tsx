@@ -15,26 +15,20 @@ export const POSTS: PostMeta[] = [
   { file: 'fall_of_pcs', title: 'An enquiry into the fall of ownership of Consumer Gaming PCs.', date: '2026-06-10', category: 'TMT', author: 'Marcus Hawkins' },
 ];
 
-interface Props {
-  activeCategory: string;
-}
-
-export default function Posts({ activeCategory }: Props) {
+export default function Posts() {
   const posts = usePosts();
-  const filtered = activeCategory === 'All'
-    ? posts
-    : posts.filter((p) => (p.category || '').toLowerCase() === activeCategory.toLowerCase());
+  const filtered = posts;
 
   return (
     <>
       <div className="page__header">
-        <h1 className="page__title">Posts</h1>
-        <p className="page__subtitle">Latest updates & ideas from Kingstone Investments.</p>
+        <h1 className="page__title">Articles</h1>
+        <p className="page__subtitle">Latest ideas from Kingstone Investments.</p>
       </div>
 
       <div className="posts-feed">
         {filtered.length === 0 ? (
-          <p className="hero__bio">No posts in {activeCategory} yet.</p>
+          <p className="hero__bio">No posts yet.</p>
         ) : (
           filtered.map((p) => (
             <article className="post-entry" id={`post-${p.file}`} key={p.file}>

@@ -7,7 +7,7 @@ export interface ContactMethod {
 
 // Edit this list to change what appears in the Contact menu.
 export const METHODS: ContactMethod[] = [
-  { label: 'Email',    value: 'contact@kingstoneinvestments.com', href: 'mailto:marcusejhawkins@gmail.com',                 kind: 'email' },
+  { label: 'Email',    value: 'kingstone.investments2@gmail.com', href: 'mailto:kingstone.investments2@gmail.com',           kind: 'email' },
   { label: 'LinkedIn', value: 'Kingstone Investments',            href: 'https://www.linkedin.com/company/kingstoneinvestments/', kind: 'link' },
 ];
 

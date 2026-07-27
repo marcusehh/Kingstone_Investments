@@ -3,40 +3,25 @@ import { useHashRoute, ROUTES, type Route } from './useHashRoute';
 import About from './pages/About';
 import Leadership from './pages/Leadership';
 import Posts from './pages/Posts';
-import Contact, { METHODS as CONTACT_METHODS } from './pages/Contact';
+import { METHODS as CONTACT_METHODS } from './pages/Contact';
 
 const TAB_LABELS: Record<Route, string> = {
   about: 'Home',
-  posts: 'Posts',
+  posts: 'Articles',
   leadership: 'Leadership',
   contact: 'Contact'
 };
 
-// Contact is rendered as a dropdown menu, so it is excluded from the routed tabs.
 const TAB_ORDER: Route[] = ['about', 'posts', 'leadership'];
-
-export const CATEGORIES = [
-  'All',
-  'Macro',
-  'TMT',
-  'Energy & Utilities',
-  'Financials',
-  'Industrials',
-  'Healthcare',
-  'FX',
-  'Real Estate'
-];
 
 export default function App() {
   const route = useHashRoute();
-  const [activeCategory, setActiveCategory] = useState<string>('All');
   const [contactOpen, setContactOpen] = useState(false);
   const contactRef = useRef<HTMLLIElement>(null);
   const baseUrl = import.meta.env.BASE_URL;
 
-  void ROUTES; // keep import for type completeness
+  void ROUTES;
 
-  // Close the Contact dropdown on outside click or Escape.
   useEffect(() => {
     if (!contactOpen) return;
     const onPointerDown = (e: MouseEvent) => {
@@ -57,14 +42,11 @@ export default function App() {
 
   return (
     <div className="app-wrapper">
-      <div className="banner">
-        <picture>
-          <source media="(max-width: 720px)" srcSet={`${baseUrl}assets/bannerP.png`} />
-          <img src={`${baseUrl}assets/banner.png`} alt="Kingstone Investments — Excellence, Invested" className="banner__img" />
-        </picture>
-      </div>
       <header className="nav">
         <nav className="nav__inner" aria-label="Primary">
+          <a href="#/about" className="nav__logo">
+            <img src={`${baseUrl}assets/logo.jpg`} alt="Kingstone Investments" className="nav__logo-img" />
+          </a>
           <ul className="nav__links">
             {TAB_ORDER.map((r) => (
               <li key={r}>
@@ -102,20 +84,6 @@ export default function App() {
           </ul>
         </nav>
       </header>
-      <div className={`subheader${route === 'posts' ? ' open' : ''}`} aria-hidden={route !== 'posts'}>
-        <div className="subheader__inner">
-          {CATEGORIES.map((c) => (
-            <button
-              key={c}
-              type="button"
-              className={`subheader__link${c === activeCategory ? ' active' : ''}`}
-              onClick={() => setActiveCategory(c)}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-      </div>
 
       <main className="app-main">
         <section className="page container" hidden={route !== 'about'}>
@@ -125,10 +93,7 @@ export default function App() {
           <Leadership />
         </section>
         <section className="page container" hidden={route !== 'posts'}>
-          <Posts activeCategory={activeCategory} />
-        </section>
-        <section className="page container" hidden={route !== 'contact'}>
-          <Contact />
+          <Posts />
         </section>
       </main>
 
