@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { marked } from 'marked';
-import { POSTS } from './pages/Posts';
+import { POSTS } from './pages/Articles';
 
 export interface PostMeta {
   file: string;

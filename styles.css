@@ -328,7 +328,7 @@ a:hover {
   margin: -56px calc(-50vw + 50%) 0;
   width: 100vw;
   max-width: 100vw;
-  background: url('assets/scenic.jpg') no-repeat center center / cover;
+  background: url('/assets/scenic.jpg') no-repeat center center / cover;
 }
 
 @supports (width: 100dvw) {
@@ -350,7 +350,7 @@ a:hover {
   max-width: 1320px;
   margin: 0 auto;
   padding: 56px clamp(24px, 6vw, 120px) 16px;
-  min-height: 73vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1052,7 +1052,7 @@ a:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: url('assets/scenic2.jpg') top center / cover no-repeat;
+  background: url('/assets/scenic2.jpg') top center / cover no-repeat;
   opacity: 0.3;
   z-index: 0;
   -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 90%);
@@ -1092,6 +1092,50 @@ a:hover {
 }
 
 /* ── Posts feed (Posts page) ── */
+.posts-filter {
+  position: sticky;
+  top: 75px;
+  z-index: 100;
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: #343434;
+}
+
+.posts-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.posts-filter__chip {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.posts-filter__chip:hover {
+  color: var(--text);
+  background: var(--tag-bg);
+  border-color: var(--accent-border);
+}
+
+.posts-filter__chip--active {
+  color: var(--accent);
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  font-weight: 600;
+}
+
 .posts-feed {
   display: flex;
   flex-direction: column;

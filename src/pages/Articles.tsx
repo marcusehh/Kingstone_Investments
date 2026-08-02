@@ -1,29 +1,49 @@
+import { useState } from 'react';
 import { usePosts, formatDate, type PostMeta } from '../posts';
 
-// ── Posts registry ────────────────────────────────────────────────────
-// One line per post. `file` is the markdown filename in `public/posts/`
-// (without the `.md` extension). The body of each post lives in that file;
-// everything else (title, date, sector) is defined here.
-//
-// To add a post:
-//   1. Drop `public/posts/<slug>.md` with the post body in markdown.
-//   2. Add a new entry to POSTS below.
-//
-// Posts are sorted by date descending automatically.
 export const POSTS: PostMeta[] = [
-  { file: 'Are_we_ready_for_AIs_implementation', title: 'Are we ready for AIs implementation?', date: '2026-07-26', category: 'TMT', author: 'Marcus Hawkins' },
+  { file: 'Are_we_ready_for_AIs_implementation', title: "Are we ready for AI's implementation?", date: '2026-07-26', category: 'TMT', author: 'Marcus Hawkins' },
   { file: 'fall_of_pcs', title: 'An enquiry into the fall of ownership of Consumer Gaming PCs.', date: '2026-06-10', category: 'TMT', author: 'Marcus Hawkins' },
 ];
 
-export default function Posts() {
+const SECTORS = [
+  'TMT', 'Energy & Utilities', 'Financials', 'FX',
+  'Healthcare', 'Industrials', 'Macro', 'Real Estate'
+];
+
+export default function Articles() {
   const posts = usePosts();
-  const filtered = posts;
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const filtered = activeCategory
+    ? posts.filter((p) => p.category === activeCategory)
+    : posts;
 
   return (
     <>
       <div className="page__header">
         <h1 className="page__title">Articles</h1>
         <p className="page__subtitle">Latest ideas from Kingstone Investments.</p>
+      </div>
+
+      <div className="posts-filter">
+        <button
+          type="button"
+          className={`posts-filter__chip${activeCategory === null ? ' posts-filter__chip--active' : ''}`}
+          onClick={() => setActiveCategory(null)}
+        >
+          All
+        </button>
+        {SECTORS.map((cat) => (
+          <button
+            key={cat}
+            type="button"
+            className={`posts-filter__chip${activeCategory === cat ? ' posts-filter__chip--active' : ''}`}
+            onClick={() => setActiveCategory(cat)}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
       <div className="posts-feed">
