@@ -20,6 +20,7 @@ Contracts are relatively new and untested through a downturn, and the lender of 
 Our evidence suggests not all. Much of the demand is incestuous investment where OpenAI, Anthropic, xAI, CoreWeave and others are trading billions. (Rediff, 2025) The financing gap is not just being filled by lending, it is being inflated by cyclical investments and hyperscalers marking up their stakes in each other. One example of this is Google and Amazon aggressively increasing the value of their stakes in Anthropic. (DDR Innova, 2026) These accounting practices extend to GPUs. Many are treating them as long term assets that depreciate gradually over ten years. (Clifford Chance, 2026) Whilst Moore's law may no longer apply, the technological improvements are far from stagnant and realistically GPUs are becoming obsolete in a fraction of a decade. (Stanley Laman, 2025) Even if the underlying demand for AI comes good, the payoff may outlast the maturity debt structures financing it. (SemiAnalysis, 2026)
 
 **List of References:**
+
 Introl. (2026). AI Infrastructure Financing.
 https://introl.com/blog/ai-infrastructure-financing-capex-opex-gpu-investment-guide-2025
 
