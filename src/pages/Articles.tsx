@@ -5,6 +5,8 @@ export const POSTS: PostMeta[] = [
   { file: 'Are_we_ready_for_AIs_implementation', title: "Are we ready for AI's implementation?", date: '2026-07-26', category: 'TMT', author: 'Marcus Hawkins' },
   { file: 'fall_of_pcs', title: 'An enquiry into the fall of ownership of Consumer Gaming PCs.', date: '2026-06-10', category: 'TMT', author: 'Marcus Hawkins' },
     { file: 'AI_sov', title: 'Is sovereign AI possible?', date: '2026-08-03', category: 'TMT', author: 'Marcus Hawkins' },
+    { file: 'RE_Q2_26', title: 'The real estate rally nobody is talking about and the crisis hiding inside it.', date: '2026-08-04', category: 'Real Estate', author: 'Oliver Kemp' },
+    { file: 'Nvidia_The_Lender', title: 'Nvidia, the lender of last resort.', date: '2026-08-11', category: 'TMT', author: 'Oliver Kemp & Marcus Hawkins' },
 ];
 
 const SECTORS = [
