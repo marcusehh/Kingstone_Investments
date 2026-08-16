@@ -1298,6 +1298,21 @@ a:hover {
   align-items: initial;
 }
 
+.home-cards__row {
+  display: flex;
+  gap: 12px;
+}
+
+.home-cards__row .home-card {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .home-cards__row {
+    flex-direction: column;
+  }
+}
+
 .home-card {
   flex: 1;
   display: flex;

@@ -79,11 +79,18 @@ export default function Home({ onNavigate }: { onNavigate?: (route: string) => v
           <hr className="home-card__divider" />
           <span className="home-card__subtitle">Read more</span>
         </a>
-        <a href="http://www.youtube.com/@Kingstone.Investments" target="_blank" rel="noreferrer" className="home-card home-card--podcast">
-          <span className="home-card__title">Kingstone Investments Podcast</span>
-          <hr className="home-card__divider" />
-          <span className="home-card__subtitle">Listen on YouTube</span>
-        </a>
+        <div className="home-cards__row">
+          <a href="http://www.youtube.com/@Kingstone.Investments" target="_blank" rel="noreferrer" className="home-card home-card--podcast">
+            <span className="home-card__title">Kingstone Investments Podcast</span>
+            <hr className="home-card__divider" />
+            <span className="home-card__subtitle">Listen on YouTube</span>
+          </a>
+          <div className="home-card home-card--report">
+            <span className="home-card__title">Weekly Sector Report</span>
+            <hr className="home-card__divider" />
+            <span className="home-card__subtitle">Coming soon</span>
+          </div>
+        </div>
         <div className="home-card home-card--qr">
           <div className="home-card__nav">
             {quarterlyResults.length > 1 && (
