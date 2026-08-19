@@ -7,6 +7,7 @@ export const POSTS: PostMeta[] = [
     { file: 'AI_sov', title: 'Is sovereign AI possible?', date: '2026-08-03', category: 'TMT', author: 'Marcus Hawkins' },
     { file: 'RE_Q2_26', title: 'The real estate rally nobody is talking about and the crisis hiding inside it.', date: '2026-08-04', category: 'Real Estate', author: 'Oliver Kemp' },
     { file: 'Nvidia_The_Lender', title: 'Nvidia, the lender of last resort.', date: '2026-08-11', category: 'TMT', author: 'Oliver Kemp & Marcus Hawkins' },
+    { file: 'Semi_Switch', title: 'The Semiconductor Switch of Hands.', date: '2026-08-14', category: 'TMT', author: 'Marcus Hawkins' },
 ];
 
 const SECTORS = [
