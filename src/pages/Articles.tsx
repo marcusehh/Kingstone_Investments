@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { usePosts, formatDate, type PostMeta } from '../posts';
 
 export const POSTS: PostMeta[] = [
@@ -18,6 +18,11 @@ const SECTORS = [
 export default function Articles() {
   const posts = usePosts();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [expandedPost, setExpandedPost] = useState<string | null>(null);
+
+  const togglePost = useCallback((file: string) => {
+    setExpandedPost((prev) => (prev === file ? null : file));
+  }, []);
 
   const filtered = activeCategory
     ? posts.filter((p) => p.category === activeCategory)
@@ -55,19 +60,21 @@ export default function Articles() {
           <p className="hero__bio">No posts yet.</p>
         ) : (
           filtered.map((p) => (
-            <article className="post-entry" id={`post-${p.file}`} key={p.file}>
-              <header className="post-entry__header">
+            <article className={`post-entry${expandedPost === p.file ? ' post-entry--open' : ''}`} id={`post-${p.file}`} key={p.file}>
+              <header className="post-entry__header" onClick={() => togglePost(p.file)}>
                 <h2 className="post-entry__title">{p.title}</h2>
                 <span className="post-entry__date">
                   {formatDate(p.date)} · {p.category || 'Uncategorised'}
                 </span>
               </header>
-              <div
-                className="post-entry__body hero__bio"
-                dangerouslySetInnerHTML={{ __html: p.bodyHtml }}
-              />
+              <div className="post-entry__body-wrap">
+                <div
+                  className="post-entry__body hero__bio"
+                  dangerouslySetInnerHTML={{ __html: p.bodyHtml }}
+                />
+              </div>
               {p.author && (
-                <footer className="post-entry__footer">
+                <footer className="post-entry__footer" onClick={() => togglePost(p.file)}>
                   Written by {p.author}
                 </footer>
               )}
