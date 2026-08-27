@@ -1337,6 +1337,66 @@ a:hover {
   margin: 0;
 }
 
+.report-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.report-modal {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 640px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.report-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color var(--transition);
+}
+
+.report-modal__close:hover {
+  color: var(--text);
+}
+
+.report-modal__title {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-h);
+  margin-bottom: 8px;
+}
+
+.report-modal__subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  display: block;
+}
+
+.report-modal__body {
+  line-height: 1.7;
+}
+
 /* ── Home cards (EFS-style) ── */
 .home-cards {
   display: flex;
@@ -1386,7 +1446,7 @@ a:hover {
   justify-content: flex-start;
   text-align: center;
   padding: 32px 24px;
-  background: var(--bg);
+  background: #222222;
   border: 1px solid var(--border);
   border-radius: 0;
   cursor: pointer;
@@ -1481,10 +1541,6 @@ a:hover {
   gap: 0;
   justify-content: center;
   align-items: stretch;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
 }
 
 .home-card__link {
@@ -1492,21 +1548,15 @@ a:hover {
   color: var(--text-muted);
   padding: 10px 14px;
   border: none;
-  border-right: 1px solid var(--border);
   border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color var(--transition), background var(--transition);
-}
-
-.home-card__link:last-child {
-  border-right: none;
+  transition: color var(--transition);
 }
 
 .home-card__link:hover {
   color: var(--text);
-  background: var(--tag-bg);
 }
 
 .home-card__title {
@@ -1583,6 +1633,10 @@ a:hover {
 .home-card--qr {
   cursor: default;
   position: relative;
+}
+
+.home-card--qr:hover {
+  background: #222222;
 }
 
 .home-card__qr-logo {
