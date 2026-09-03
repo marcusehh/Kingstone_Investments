@@ -11,14 +11,18 @@ export const POSTS: PostMeta[] = [
     { file: 'Debt_Doom_Loop', title: 'The looming Debt-Doom-Loop.', date: '2026-08-27', category: 'Macro', author: 'Marcus Hawkins' },
 ];
 
-const SECTORS = [
+export const SECTORS = [
   'TMT', 'Energy & Utilities', 'Financials', 'FX',
   'Healthcare', 'Industrials', 'Macro', 'Real Estate'
 ];
 
-export default function Articles() {
+interface ArticlesProps {
+  activeCategory: string | null;
+  setActiveCategory: (cat: string | null) => void;
+}
+
+export default function Articles({ activeCategory, setActiveCategory }: ArticlesProps) {
   const posts = usePosts();
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [expandedPost, setExpandedPost] = useState<string | null>(null);
 
   const togglePost = useCallback((file: string) => {
@@ -31,7 +35,7 @@ export default function Articles() {
 
   return (
     <>
-      <div className="page__header">
+      <div className="page__header page__header--articles">
         <h1 className="page__title">Articles</h1>
         <p className="page__subtitle">Latest ideas from Kingstone Investments.</p>
       </div>

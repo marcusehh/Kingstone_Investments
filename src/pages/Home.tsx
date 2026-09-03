@@ -1,28 +1,10 @@
 import { useState, useEffect } from 'react';
 import { usePosts } from '../posts';
-import { useMarkdownCollection } from '../loadMarkdown';
-
-interface ResultMeta {
-  file: string;
-  title: string;
-  date: string;
-}
-
-const QUARTERLY_RESULTS: ResultMeta[] = [
-  { file: 'q2-2026', title: 'Q2 2026', date: 'July 2026' },
-  { file: 'q1-2026', title: 'Q1 2026', date: 'April 2026' },
-];
-
-const WEEKLY_REPORTS: ResultMeta[] = [
-  { file: 'week-1', title: 'Week 1', date: 'August 2026' },
-];
 
 export default function Home({ onNavigate }: { onNavigate?: (route: string) => void }) {
   const posts = usePosts();
   const latest = posts[0];
-  const [qrIndex, setQrIndex] = useState(0);
   const [scrolled, setScrolled] = useState(false);
-  const [reportOpen, setReportOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -30,37 +12,8 @@ export default function Home({ onNavigate }: { onNavigate?: (route: string) => v
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const quarterlyResults = useMarkdownCollection('quarterly-results', QUARTERLY_RESULTS).sort(
-    (a, b) => (a.meta.date < b.meta.date ? 1 : -1)
-  );
-
-  const weeklyReports = useMarkdownCollection('weekly-reports', WEEKLY_REPORTS).sort(
-    (a, b) => (a.meta.date < b.meta.date ? 1 : -1)
-  );
-  const latestReport = weeklyReports[0];
-
   return (
     <>
-      {reportOpen && (
-        <div className="report-modal__backdrop" onClick={() => setReportOpen(false)}>
-          <div className="report-modal" onClick={(e) => e.stopPropagation()}>
-            <button type="button" className="report-modal__close" onClick={() => setReportOpen(false)}>✕</button>
-            <h2 className="report-modal__title">Recent Market Report</h2>
-            {latestReport ? (
-              <>
-                <span className="report-modal__subtitle">{latestReport.meta.title}</span>
-                <div
-                  className="report-modal__body hero__bio"
-                  dangerouslySetInnerHTML={{ __html: latestReport.bodyHtml }}
-                />
-              </>
-            ) : (
-              <p className="hero__bio">Coming soon.</p>
-            )}
-          </div>
-        </div>
-      )}
-
       <div className="hero-scenic">
         <div className="hero-scenic__overlay">
           <div className="hero-scenic__content">
@@ -107,7 +60,7 @@ export default function Home({ onNavigate }: { onNavigate?: (route: string) => v
         <a href="/" className="home-card home-card--article" onClick={(e) => { e.preventDefault(); onNavigate?.('articles'); }}>
           <span className="home-card__title">{latest ? latest.title : 'Recent Article'}</span>
           <hr className="home-card__divider" />
-          <span className="home-card__subtitle">Read more</span>
+          <span className="home-card__subtitle">Read our most recent article</span>
         </a>
         <div className="home-cards__row">
           <div className="home-card home-card--podcast" onClick={(e) => { if (!(e.target as HTMLElement).closest('.home-card__link')) { window.open('https://open.spotify.com/show/0VtdGyWOFYEnuu84uR4xXw?si=3e09623dd1764161', '_blank'); } }}>
@@ -121,46 +74,11 @@ export default function Home({ onNavigate }: { onNavigate?: (route: string) => v
               </a>
             </div>
           </div>
-          <div className="home-card home-card--report" onClick={() => setReportOpen(true)}>
-            <span className="home-card__title">Recent Market Report</span>
+          <div className="home-card home-card--report">
+            <span className="home-card__title">Fortnightly Market Report</span>
             <hr className="home-card__divider" />
-            <span className="home-card__subtitle">Read latest</span>
+            <span className="home-card__subtitle">Coming soon</span>
           </div>
-        </div>
-        <div className="home-card home-card--qr">
-          <img src="/assets/KI_BW_Logo.jpg" alt="" className="home-card__qr-logo" />
-          {quarterlyResults.length > 1 && (
-            <div className="home-card__nav-arrows">
-              <button
-                type="button"
-                className="home-card__nav-arrow"
-                onClick={() => setQrIndex((i) => Math.max(0, i - 1))}
-                disabled={qrIndex === 0}
-                aria-label="Previous quarter"
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                className="home-card__nav-arrow"
-                onClick={() => setQrIndex((i) => Math.min(quarterlyResults.length - 1, i + 1))}
-                disabled={qrIndex === quarterlyResults.length - 1}
-                aria-label="Next quarter"
-              >
-                ›
-              </button>
-            </div>
-          )}
-          <span className="home-card__title">Quarterly Results</span>
-          {quarterlyResults.length > 0 && (
-            <>
-              <span className="home-card__subtitle">{quarterlyResults[qrIndex].meta.title}</span>
-              <div
-                className="home-card__preview"
-                dangerouslySetInnerHTML={{ __html: quarterlyResults[qrIndex].bodyHtml }}
-              />
-            </>
-          )}
         </div>
       </div>
     </>
