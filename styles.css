@@ -1720,7 +1720,7 @@ a:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/assets/KI_Pod_Logo.JPG') center / contain no-repeat;
+  background: url('/assets/KI_Pod.png') center / contain no-repeat;
   z-index: 0;
 }
 
