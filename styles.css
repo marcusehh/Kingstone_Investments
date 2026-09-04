@@ -85,6 +85,10 @@ a:hover {
 
 /* ── Burger ── */
 .nav__burger {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 320;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -105,18 +109,31 @@ a:hover {
 }
 
 .nav__burger-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  position: relative;
+  width: 20px;
+  height: 16px;
 }
 
 .nav__burger-line {
-  display: block;
+  position: absolute;
+  left: 0;
   width: 20px;
   height: 2px;
   background: var(--text);
   transition: transform 0.3s ease, opacity 0.3s ease;
   transform-origin: center;
+}
+
+.nav__burger-line:nth-child(1) { top: 0; }
+.nav__burger-line:nth-child(2) { top: 7px; }
+.nav__burger-line:nth-child(3) { top: 14px; }
+
+.nav__burger--open {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.nav__burger--open .nav__burger-line {
+  background: #fff;
 }
 
 .nav__burger--open .nav__burger-line:nth-child(1) {
@@ -235,7 +252,7 @@ a:hover {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 320;
+  z-index: 300;
 }
 
 .banner__img {
@@ -852,34 +869,74 @@ a:hover {
   background: var(--accent);
 }
 
-/* ── Footer ── */
-.footer {
-  position: fixed;
+/* ── Footer bar (always visible slim bar) ── */
+.footer-bar {
+  position: sticky;
   bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 200;
+  z-index: 1;
   border-top: 1px solid var(--border);
-  background: rgba(36, 36, 36, 0.95);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  padding: 3px 0;
+  background: var(--bg);
+  padding: 16px 0;
+  text-align: center;
 }
 
-.footer__inner {
+.footer-bar__copy {
+  font-size: 0.8125rem;
+  color: var(--text-faint);
+}
+
+/* ── Expanded footer (nav columns above the bar) ── */
+.footer-expanded {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  padding: 48px 0 32px;
+}
+
+.footer-expanded__inner {
   padding: 0 clamp(24px, 6vw, 120px);
   max-width: 1320px;
   margin: 0 auto;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
 }
 
-.footer__copy {
-  font-size: 0.8125rem;
+.footer-expanded__columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.footer-expanded__col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-expanded__heading {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--text-faint);
+  margin-bottom: 8px;
+}
+
+.footer-expanded__link {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer-expanded__link:hover {
+  color: var(--text);
+}
+
+@media (max-width: 720px) {
+  .footer-expanded__columns {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
 }
 
 /* ── Activity feed ── */
@@ -926,6 +983,7 @@ a:hover {
 /* ── Mobile ── */
 @media (max-width: 720px) {
   .nav {
+    position: absolute;
     flex-direction: column;
     height: auto;
   }
@@ -955,11 +1013,6 @@ a:hover {
     font-size: 0.8125rem;
   }
 
-  .footer__inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 8px;
-  }
 
   .experience-list {
     grid-template-columns: 1fr;
@@ -1575,14 +1628,14 @@ a:hover {
 }
 
 .home-cards__row .home-card--podcast {
-  flex: 3;
-  padding-top: 0;
-  padding-bottom: 0;
+  flex: none;
+  aspect-ratio: 1;
+  padding: 16px 24px;
   justify-content: center;
 }
 
 .home-cards__row .home-card--report {
-  flex: 7;
+  flex: 1;
   padding-top: 70px;
   padding-bottom: 70px;
 }
@@ -1592,8 +1645,7 @@ a:hover {
     flex-direction: column;
   }
   .home-cards__row .home-card--podcast {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    width: 100%;
   }
 }
 
@@ -1648,6 +1700,12 @@ a:hover {
   background: transparent;
 }
 
+@media (max-width: 720px) {
+  .home-card--article::after {
+    background-image: url('/assets/bannerP.png');
+  }
+}
+
 .home-card--article > * {
   position: relative;
   z-index: 2;
@@ -1663,7 +1721,7 @@ a:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/assets/KI_Pod_Logo.JPG') center / cover no-repeat;
+  background: url('/assets/KI_Pod_Logo.JPG') center / contain no-repeat;
   z-index: 0;
 }
 
@@ -1804,7 +1862,7 @@ a:hover {
   left: 12px;
   width: 60px;
   height: 60px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 4px;
   opacity: 0.8;
 }

@@ -69,16 +69,17 @@ export default function App() {
           <a href="/" className="nav__logo" onClick={(e) => { e.preventDefault(); setRoute('home'); }}>
             <img src={`${baseUrl}assets/logo.jpg`} alt="Kingstone Investments" className="nav__logo-img" />
           </a>
-<button type="button" className={`nav__burger${sidebarOpen ? ' nav__burger--open' : ''}`} onClick={() => setSidebarOpen((o) => !o)} aria-label="Menu">
-            <span className="nav__burger-label">Menu</span>
-            <span className="nav__burger-lines">
-              <span className="nav__burger-line" />
-              <span className="nav__burger-line" />
-              <span className="nav__burger-line" />
-            </span>
-          </button>
         </nav>
       </header>
+
+      <button type="button" className={`nav__burger${sidebarOpen ? ' nav__burger--open' : ''}`} onClick={() => setSidebarOpen((o) => !o)} aria-label="Menu">
+        <span className="nav__burger-label">Menu</span>
+        <span className="nav__burger-lines">
+          <span className="nav__burger-line" />
+          <span className="nav__burger-line" />
+          <span className="nav__burger-line" />
+        </span>
+      </button>
 
       <main className="app-main">
         <section className="page container" hidden={route !== 'home'}>
@@ -95,9 +96,31 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="footer__inner">
-          <span className="footer__copy">© {new Date().getFullYear()} Kingstone Investments</span>
+      <footer className="footer-bar">
+        <span className="footer-bar__copy">© {new Date().getFullYear()} Kingstone Investments</span>
+      </footer>
+      <footer className="footer-expanded">
+        <div className="footer-expanded__inner">
+          <div className="footer-expanded__columns">
+            <div className="footer-expanded__col">
+              <h4 className="footer-expanded__heading">Pages</h4>
+              {TAB_ORDER.map((r) => (
+                <a key={r} href="/" className="footer-expanded__link" onClick={(e) => { e.preventDefault(); setRoute(r); }}>
+                  {TAB_LABELS[r]}
+                </a>
+              ))}
+            </div>
+            <div className="footer-expanded__col">
+              <h4 className="footer-expanded__heading">Contact</h4>
+              {CONTACT_METHODS.map((m) => (
+                <a key={m.label} className="footer-expanded__link" href={m.href} target={m.kind === 'link' ? '_blank' : undefined} rel={m.kind === 'link' ? 'noreferrer' : undefined}>
+                  {m.label}
+                </a>
+              ))}
+              <a className="footer-expanded__link" href="https://open.spotify.com/show/0VtdGyWOFYEnuu84uR4xXw" target="_blank" rel="noreferrer">Spotify</a>
+              <a className="footer-expanded__link" href="http://www.youtube.com/@Kingstone.Investments" target="_blank" rel="noreferrer">YouTube</a>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
