@@ -8,12 +8,12 @@ export const POSTS: PostMeta[] = [
     { file: 'RE_Q2_26', title: 'The real estate rally nobody is talking about and the crisis hiding inside it.', date: '2026-08-04', category: 'Real Estate', author: 'Oliver Kemp' },
     { file: 'Nvidia_The_Lender', title: 'Nvidia, the lender of last resort.', date: '2026-08-11', category: 'TMT', author: 'Oliver Kemp & Marcus Hawkins' },
     { file: 'Semi_Switch', title: 'The Semiconductor Switch of Hands.', date: '2026-08-14', category: 'TMT', author: 'Marcus Hawkins' },
-    { file: 'Debt_Doom_Loop', title: 'The looming Debt-Doom-Loop.', date: '2026-08-27', category: 'Macro', author: 'Marcus Hawkins' },
+    { file: 'Debt_Doom_Loop', title: 'The looming Debt-Doom-Loop.', date: '2026-08-27', category: 'Macro & FX', author: 'Marcus Hawkins' },
 ];
 
 export const SECTORS = [
-  'TMT', 'Energy & Utilities', 'Financials', 'FX',
-  'Healthcare', 'Industrials', 'Macro', 'Real Estate'
+  'TMT', 'Energy & Utilities', 'Financials', 'Macro & FX',
+  'Healthcare', 'Industrials', 'Consumer', 'Real Estate'
 ];
 
 interface ArticlesProps {
